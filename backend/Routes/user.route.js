@@ -53,6 +53,6 @@ userRoute.post("/login", async(req, res)=>{
 
 userRoute.get("/logout", (req, res)=>{
     res.clearCookie("accessToken");
-    res.status(200).send({ Msg: "Logged out successfully" });
+    res.status(200).send({ "Msg": "Logged out successfully" });
 })
 module.exports={userRoute}
