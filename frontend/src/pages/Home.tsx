@@ -5,6 +5,7 @@ import { Footer } from "../components/Footer";
 import { LuMessagesSquare } from "react-icons/lu";
 import { FaRegStar } from "react-icons/fa6";
 import { HiOutlineDesktopComputer } from "react-icons/hi";
+import { Button } from "../components/Button";
 
 export const Home = () => {
     return (
@@ -14,6 +15,9 @@ export const Home = () => {
                     <div className="w-[45%]">
                         <h1 className=" mb-3 text-xl font-semibold">Welcome to <span className="text-indigo-500 text-2xl">CodeGenius –</span> <br />Where Innovation Meets Talent!</h1>
                         <p className="text-justify text-[1.1rem] text-zinc-300">At CodeGenius, we revolutionize the interview experience by harnessing the power of artificial intelligence. Our platform offers a cutting-edge, virtual interview solution that seamlessly blends technology and talent assessment. Say goodbye to traditional interview preparation and embrace a smarter, more efficient approach to your interview preparation.</p>
+                        <div className="mt-8">
+                            <Button text={"TRY FOR FREE"} link={"/dashboard"}/>
+                        </div>
                     </div>
                     <div className="w-[45%]">
                         <img src={pic1} alt="interview poster" className="rounded-lg w-full" />
@@ -36,7 +40,7 @@ export const Home = () => {
                     </div>
                 </div>
 
-                <div className="mt-28 mb-40">
+                <div className="mt-28">
                     <h1 className="my-14 text-4xl font-semibold text-center">Tailored solution to make you <br /><span className="text-indigo-300">Interview Ready</span></h1>
                     <div className="flex justify-between">
                         <div className="w-[24%] border border-indigo-500 p-5 rounded-2xl shadow-xl shadow-indigo-500/20">
@@ -60,6 +64,9 @@ export const Home = () => {
                             </h3>
                             <p className="text-sm leading-6">Receive customised interview and follow-up questions aligned with the skills or role you’re practicing for.</p>
                         </div>
+                    </div>
+                    <div className="text-center my-16">
+                        <Button text={"TRY FOR FREE"} link={"/dashboard"}/>
                     </div>
                 </div>
             </div>
