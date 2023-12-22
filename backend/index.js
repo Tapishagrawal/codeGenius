@@ -1,8 +1,12 @@
 const express = require('express');
 const connection = require('./connection');
+const { userRoute } = require('./Routes/user.route');
 require("dotenv").config();
 
 const app = express();
+app.use(express.json())
+
+app.use("/users", userRoute)
 
 //port comes from the env file and that file will be made by your own.
 app.listen(process.env.port, async()=>{
