@@ -14,7 +14,7 @@ export const interviewStartPost = () => async (dispatch: any) => {
         let res = await axios.post(`${URL}/interview/start`);
         dispatch({
             type: INTERVIEW_START_POST_REQUEST,
-            payload: { message: res.data.message, data: res.data.data }
+            payload: { message: res.data.message, data: res.data.data, newQue:res.data.newQue }
         });
     } catch (error) {
         dispatch({ type: INTERVIEW_FAILIURE });
@@ -28,7 +28,7 @@ export const interviewUpdatePatch = (id: String, conversation: conversationItem[
         let res = await axios.patch(`${URL}/interview/update/${id}`, conversation);
         dispatch({
             type: INTERVIEW_UPDATE_PATCH_REQUEST,
-            payload: { success: res.data.success, data: res.data.data }
+            payload: { success: res.data.success, data: res.data.data, newQue:res.data.newQue }
         });
     } catch (error) {
         dispatch({ type: INTERVIEW_FAILIURE });

@@ -35,6 +35,7 @@ export const reducer = (state: state = initialState, action: { type: string; pay
                 ...state, isLoading: false, isError: false,
                 message:payload.message,
                 id:payload.data._id,
+                newQue:payload.newQue
             }
         }
         case INTERVIEW_UPDATE_PATCH_REQUEST: {
@@ -42,7 +43,8 @@ export const reducer = (state: state = initialState, action: { type: string; pay
                 ...state, isLoading: false, isError: false,
                 success:payload.success,
                 data:payload.data,
-                id:payload.data._id
+                id:payload.data._id,
+                newQue:payload.newQue
             }
         }
         case INTERVIEW_GET_DATA_REQUEST: {

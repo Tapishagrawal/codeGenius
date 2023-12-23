@@ -18,3 +18,9 @@
   ::-webkit-scrollbar-track {
     background-color: transparent; /* Set the color of the scrollbar track */
   }
+  .micOff path {
+    color: indianred;
+  }
+  .micOn path {
+    color: rgb(82, 148, 86);
+  }
