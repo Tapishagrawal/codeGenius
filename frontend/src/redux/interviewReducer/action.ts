@@ -6,7 +6,7 @@ export interface conversationItem {
     content: String,
 }
 
-const URL = "http://localhost:4500";
+const URL = "https://codegenius-66xv.onrender.com";
 
 export const interviewStartPost = () => async (dispatch: any) => {
     try {
