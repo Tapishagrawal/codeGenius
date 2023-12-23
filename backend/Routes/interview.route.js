@@ -130,4 +130,33 @@ interviewRouter.post("/end/:id", async (req, res) => {
   }
 });
 
+interviewRouter.get("/get/:id", async(req,res)=>{
+    // console.log("hi")
+
+    const { id } = req.params;
+  
+    try {
+       
+        const interviewData = await InterviewModel.findById({_id:id});
+
+        if (!interviewData) {
+          return res.status(404).send({
+            success: false,
+            message: "Interview data not found",
+          });
+        } 
+
+        res.status(200).send({
+            success: true,
+            message: "Interview data fetched successfully",
+            data:interviewData,
+        });
+
+    } catch (err) {
+      console.log(err);
+      res.status(400).send({ success: false, message: "Interview data not found" });
+    }
+}); 
+
+
 module.exports = { interviewRouter };
