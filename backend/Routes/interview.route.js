@@ -62,7 +62,7 @@ interviewRouter.post("/start", async (req, res) => {
   }
 });
 
-interviewRouter.post("/update/:id", async (req, res) => {
+interviewRouter.patch("/update/:id", async (req, res) => {
   const { conversation } = req.body;
   const { id } = req.params;
 
@@ -131,8 +131,7 @@ interviewRouter.post("/end/:id", async (req, res) => {
 });
 
 interviewRouter.get("/get/:id", async(req,res)=>{
-    // console.log("hi")
-
+  
     const { id } = req.params;
   
     try {

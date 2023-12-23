@@ -1,6 +1,7 @@
-import { CHANGE_INTTERVIEW_TYPE, INTERVIEW_FAILIURE, INTERVIEW_REQUEST, INTERVIEW_START_POST_REQUEST } from "../actionType"
+import { CHANGE_INTTERVIEW_TYPE, INTERVIEW_END_POST_REQUEST, INTERVIEW_FAILIURE, INTERVIEW_GET_DATA_REQUEST, INTERVIEW_REQUEST, INTERVIEW_START_POST_REQUEST, INTERVIEW_UPDATE_PATCH_REQUEST } from "../actionType"
 
 interface state {
+    id:String
     isLoading?: boolean,
     isError?: boolean,
     data?: [],
@@ -10,6 +11,7 @@ interface state {
     message?: String
 }
 const initialState: state = {
+    id:"",
     isLoading: false,
     isError: false,
     data: [],
@@ -31,10 +33,32 @@ export const reducer = (state: state = initialState, action: { type: string; pay
         case INTERVIEW_START_POST_REQUEST: {
             return {
                 ...state, isLoading: false, isError: false,
+                message:payload.message,
+                id:payload.data._id,
+            }
+        }
+        case INTERVIEW_UPDATE_PATCH_REQUEST: {
+            return {
+                ...state, isLoading: false, isError: false,
+                success:payload.success,
+                data:payload.data,
+                id:payload.data._id
+            }
+        }
+        case INTERVIEW_GET_DATA_REQUEST: {
+            return {
+                ...state, isLoading: false, isError: false,
                 success:payload.success,
                 message:payload.message,
                 data:payload.data,
-                newQue:payload.newQue
+                id:payload.data._id
+            }
+        }
+        case INTERVIEW_END_POST_REQUEST: {
+            return {
+                ...state, isLoading: false, isError: false,
+                success:payload.success,
+                data:payload.data,
             }
         }
         case CHANGE_INTTERVIEW_TYPE: {
