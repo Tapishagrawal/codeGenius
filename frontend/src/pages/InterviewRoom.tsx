@@ -7,17 +7,19 @@ import { useNavigate } from "react-router-dom";
 import { useSpeechSynthesis, useSpeechRecognition } from 'react-speech-kit';
 import { FaMicrophone } from "react-icons/fa6";
 import { FaMicrophoneSlash } from "react-icons/fa6";
+import { SpeechRecognitionResult } from 'react-speech-kit';
+
 
 export const InterviewRoom = () => {
     const [textAreaData, setTextAreaData] = useState("");
     const { speak, speaking } = useSpeechSynthesis();
     const { listen, listening, stop } = useSpeechRecognition({
-        onResult: (result) => {
+        onResult: (result: SpeechRecognitionResult) => {
             setTextAreaData(textAreaData + " " + result);
         },
     });
     const navigate = useNavigate()
-    const { type, data, isLoading, id, message, newQue } = useSelector((store) => {
+    const { type, data, isLoading, id, message, newQue } = useSelector((store: RootState) => {
         return {
             type: store.interviewReducer.type,
             success: store.interviewReducer.success,
@@ -28,18 +30,18 @@ export const InterviewRoom = () => {
             newQue: store.interviewReducer.newQue,
         }
     });
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<Dispatch<any>>();
 
     const handleSendAnswer = () => {
-        const newConversation = { role: "user", content: textAreaData };
-        const newdata = [...data.conversation, newConversation]
-        dispatch(interviewUpdatePatch(id, { conversation: newdata }));
-        setTextAreaData("")
-    }
+        const newConversation: conversationItem = { role: "user", content: textAreaData };
+        const newdata = [...data.conversation, newConversation];
+        dispatch(interviewUpdatePatch(id, newdata));
+        setTextAreaData("");
+    };
     const handleEndInterview = () => {
-        dispatch(interviewEndPost(id, { conversation: data.conversation }))
-        navigate("/dashboard")
-    }
+        dispatch(interviewEndPost(id, data.conversation));
+        navigate("/dashboard");
+    };
 
     useEffect(() => {
         if (id) {
@@ -83,7 +85,7 @@ export const InterviewRoom = () => {
                 <div className="transcripts w-[29%] bg-[#333b48f7] h-[600px] rounded-md p-3">
                     <div className="p-2 h-[55%] bg-[#7f7cae78] rounded overflow-x-scroll flex flex-col gap-2">
                         {data.conversation &&
-                            data.conversation.slice(1).map((item, i ) => (
+                            data.conversation.slice(1).map((item: conversationItem, i: any) => (
                                 item.role === "assistant" ?
                                     <div key={i} className="p-2 bg-[#10091485] rounded-md">
                                         <div className="bg-transparent flex items-center gap-3">

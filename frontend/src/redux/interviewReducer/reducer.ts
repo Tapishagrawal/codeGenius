@@ -1,16 +1,16 @@
 import { CHANGE_INTTERVIEW_TYPE, INTERVIEW_END_POST_REQUEST, INTERVIEW_FAILIURE, INTERVIEW_GET_DATA_REQUEST, INTERVIEW_REQUEST, INTERVIEW_START_POST_REQUEST, INTERVIEW_UPDATE_PATCH_REQUEST } from "../actionType"
 
-interface state {
-    id:String
-    isLoading?: boolean,
-    isError?: boolean,
-    data?: [],
-    newQue?: String,
-    success?: boolean,
-    type: String,
-    message?: String
-}
-const initialState: state = {
+interface InterviewState {
+    isLoading: boolean;
+    isError: boolean;
+    message: any;
+    id: any;
+    newQue: any;
+    data?: [] | undefined;
+    success?: boolean | undefined;
+    type: string;
+  }
+const initialState: InterviewState = {
     id:"",
     isLoading: false,
     isError: false,
@@ -21,7 +21,7 @@ const initialState: state = {
     message: ""
 }
 
-export const reducer = (state: state = initialState, action: { type: string; payload: any }) => {
+export const reducer = (state = initialState, action: { type: string; payload: any }) => {
     const { type, payload } = action;
     switch (type) {
         case INTERVIEW_REQUEST: {

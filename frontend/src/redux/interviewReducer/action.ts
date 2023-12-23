@@ -25,7 +25,7 @@ export const interviewStartPost = () => async (dispatch: any) => {
 export const interviewUpdatePatch = (id: String, conversation: conversationItem[]) => async (dispatch: any) => {
     try {
         dispatch({ type: INTERVIEW_REQUEST });
-        let res = await axios.patch(`${URL}/interview/update/${id}`, conversation);
+        let res = await axios.patch(`${URL}/interview/update/${id}`, {conversation});
         dispatch({
             type: INTERVIEW_UPDATE_PATCH_REQUEST,
             payload: { success: res.data.success, data: res.data.data, newQue:res.data.newQue }
@@ -52,10 +52,10 @@ export const interviewGetData = (id: String) => async (dispatch: any) => {
 };
 
 export const interviewEndPost = (id: String, conversation: conversationItem[]) => async (dispatch: any) => {
-    console.log(id, conversation)
+    
     try {
         dispatch({ type: INTERVIEW_REQUEST });
-        let res = await axios.post(`${URL}/interview/end/${id}`, conversation);
+        let res = await axios.post(`${URL}/interview/end/${id}`, {conversation});
         dispatch({
             type: INTERVIEW_END_POST_REQUEST,
             payload: { success: res.data.success, data: res.data.data }
