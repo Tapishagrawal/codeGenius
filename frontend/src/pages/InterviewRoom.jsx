@@ -12,12 +12,12 @@ export const InterviewRoom = () => {
     const [textAreaData, setTextAreaData] = useState("");
     const { speak, speaking } = useSpeechSynthesis();
     const { listen, listening, stop } = useSpeechRecognition({
-        onResult: (result: any) => {
+        onResult: (result) => {
             setTextAreaData(textAreaData + " " + result);
         },
     });
     const navigate = useNavigate()
-    const { type, data, isLoading, id, message, newQue } = useSelector((store: RootState) => {
+    const { type, data, isLoading, id, message, newQue } = useSelector((store) => {
         return {
             type: store.interviewReducer.type,
             success: store.interviewReducer.success,
@@ -28,7 +28,7 @@ export const InterviewRoom = () => {
             newQue: store.interviewReducer.newQue,
         }
     });
-    const dispatch = useDispatch<Dispatch>()
+    const dispatch = useDispatch()
 
     const handleSendAnswer = () => {
         const newConversation = { role: "user", content: textAreaData };
@@ -83,7 +83,7 @@ export const InterviewRoom = () => {
                 <div className="transcripts w-[29%] bg-[#333b48f7] h-[600px] rounded-md p-3">
                     <div className="p-2 h-[55%] bg-[#7f7cae78] rounded overflow-x-scroll flex flex-col gap-2">
                         {data.conversation &&
-                            data.conversation.slice(1).map((item: conversationItem, i: any) => (
+                            data.conversation.slice(1).map((item, i ) => (
                                 item.role === "assistant" ?
                                     <div key={i} className="p-2 bg-[#10091485] rounded-md">
                                         <div className="bg-transparent flex items-center gap-3">
