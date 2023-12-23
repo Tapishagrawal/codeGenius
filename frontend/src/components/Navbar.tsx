@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 export const Navbar = () => {
     return (
-        <nav className=" border-gray-200 fixed top-0 left-0 w-full shadow-2xl">
+        <nav className=" border-gray-200 fixed top-0 left-0 w-full shadow-2xl z-50">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
