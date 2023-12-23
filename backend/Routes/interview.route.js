@@ -115,7 +115,7 @@ interviewRouter.post("/end/:id", async (req, res) => {
     const feedbackAdded = await InterviewModel.findByIdAndUpdate(
       id,
       { feedback: feedback },
-      { new: true }
+      { new: true } 
     );
 
     res.status(200).send({
