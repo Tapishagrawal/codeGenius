@@ -1,10 +1,10 @@
-import { legacy_createStore, applyMiddleware, combineReducers,} from "redux"
-import { thunk } from "redux-thunk";
+import { legacy_createStore, applyMiddleware, combineReducers } from "redux";
+import {thunk} from 'redux-thunk'
 import { reducer as interviewReducer } from "./interviewReducer/reducer";
 
-
 const rootReducer = combineReducers({
-    interviewReducer
-})
+  interviewReducer,
+});
 
-export const store = legacy_createStore(rootReducer, applyMiddleware(thunk)) 
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
+export type RootState = ReturnType<typeof rootReducer>;
