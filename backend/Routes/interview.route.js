@@ -11,14 +11,13 @@ const openai = new OpenAI({ apiKey: apiKey });
 
 const interviewRouter = express.Router();
 
-   
-interviewRouter.post("/start", async (req, res) => {
-  const {type}= req.body;
 
+interviewRouter.post("/start", async (req, res) => {
+  let { type } = req.body;
+  type = type ? type : "MERN"
   try {
 
-    const typeOfPrompt= allPrompts[type];
-
+    const typeOfPrompt = allPrompts[type];
     let startConvo = [{ role: "user", content: typeOfPrompt }];
 
     const response = await openai.chat.completions.create({
@@ -40,7 +39,7 @@ interviewRouter.post("/start", async (req, res) => {
       .send({
         success: true,
         message: "Interview Started",
-        data:newInterview,
+        data: newInterview,
         newQue: firstQue,
       });
   } catch (error) {
@@ -74,7 +73,7 @@ interviewRouter.patch("/update/:id", async (req, res) => {
     res.status(200).send({
       success: true,
       message: "Updated Successfully",
-      data:updatedInterview,
+      data: updatedInterview,
       newQue: nextQuestion,
     });
   } catch (error) {
@@ -101,14 +100,14 @@ interviewRouter.patch("/end/:id", async (req, res) => {
     const feedbackAdded = await InterviewModel.findByIdAndUpdate(
       id,
       { feedback: feedback },
-      { new: true } 
+      { new: true }
     );
 
     res.status(200).send({
       success: true,
       message: "Thank you for attempting this interview",
-      data:feedbackAdded,
-      newQue:feedback
+      data: feedbackAdded,
+      newQue: feedback
     });
   } catch (err) {
     console.log(err);
@@ -116,32 +115,32 @@ interviewRouter.patch("/end/:id", async (req, res) => {
   }
 });
 
-interviewRouter.get("/get/:id", async(req,res)=>{
-  
-    const { id } = req.params;
-  
-    try {
-       
-        const interviewData = await InterviewModel.findById({_id:id});
+interviewRouter.get("/get/:id", async (req, res) => {
 
-        if (!interviewData) {
-          return res.status(404).send({
-            success: false,
-            message: "Interview data not found",
-          });
-        } 
+  const { id } = req.params;
 
-        res.status(200).send({
-            success: true,
-            message: "Interview data fetched successfully",
-            data:interviewData,
-        });
+  try {
 
-    } catch (err) {
-      console.log(err);
-      res.status(400).send({ success: false, message: "Interview data not found" });
+    const interviewData = await InterviewModel.findById({ _id: id });
+
+    if (!interviewData) {
+      return res.status(404).send({
+        success: false,
+        message: "Interview data not found",
+      });
     }
-}); 
+
+    res.status(200).send({
+      success: true,
+      message: "Interview data fetched successfully",
+      data: interviewData,
+    });
+
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({ success: false, message: "Interview data not found" });
+  }
+});
 
 
 module.exports = { interviewRouter };
