@@ -8,13 +8,13 @@ export interface conversationItem {
 
 const URL = "https://codegenius-66xv.onrender.com";
 
-export const interviewStartPost = () => async (dispatch: any) => {
+export const interviewStartPost = (type: String) => async (dispatch: any) => {
     try {
         dispatch({ type: INTERVIEW_REQUEST });
-        let res = await axios.post(`${URL}/interview/start`);
+        let res = await axios.post(`${URL}/interview/start`, { type });
         dispatch({
             type: INTERVIEW_START_POST_REQUEST,
-            payload: { message: res.data.message, data: res.data.data, newQue:res.data.newQue }
+            payload: { message: res.data.message, data: res.data.data, newQue: res.data.newQue }
         });
     } catch (error) {
         dispatch({ type: INTERVIEW_FAILIURE });
@@ -25,10 +25,10 @@ export const interviewStartPost = () => async (dispatch: any) => {
 export const interviewUpdatePatch = (id: String, conversation: conversationItem[]) => async (dispatch: any) => {
     try {
         dispatch({ type: INTERVIEW_REQUEST });
-        let res = await axios.patch(`${URL}/interview/update/${id}`, {conversation});
+        let res = await axios.patch(`${URL}/interview/update/${id}`, { conversation });
         dispatch({
             type: INTERVIEW_UPDATE_PATCH_REQUEST,
-            payload: { success: res.data.success, data: res.data.data, newQue:res.data.newQue }
+            payload: { success: res.data.success, data: res.data.data, newQue: res.data.newQue }
         });
     } catch (error) {
         dispatch({ type: INTERVIEW_FAILIURE });
@@ -52,10 +52,10 @@ export const interviewGetData = (id: String) => async (dispatch: any) => {
 };
 
 export const interviewEndPost = (id: String, conversation: conversationItem[]) => async (dispatch: any) => {
-    
+
     try {
         dispatch({ type: INTERVIEW_REQUEST });
-        let res = await axios.post(`${URL}/interview/end/${id}`, {conversation});
+        let res = await axios.post(`${URL}/interview/end/${id}`, { conversation });
         dispatch({
             type: INTERVIEW_END_POST_REQUEST,
             payload: { success: res.data.success, data: res.data.data }

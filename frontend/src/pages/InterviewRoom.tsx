@@ -78,7 +78,7 @@ export const InterviewRoom = () => {
                         {message === "Interview data fetched successfully" ?
                             <button onClick={handleEndInterview} className="border px-3 py-1 rounded hover:bg-red-600/30 hover:text-red-100 transition">{isLoading ? "Loading..." : "End Interview"}</button>
                             :
-                            <button onClick={() => dispatch(interviewStartPost())} className="border px-3 py-1 rounded hover:bg-indigo-600/35 hover:text-indigo-200 transition">{isLoading ? "Loading..." : "Start Interview"}</button>
+                            <button onClick={() => dispatch(interviewStartPost(type))} className="border px-3 py-1 rounded hover:bg-indigo-600/35 hover:text-indigo-200 transition">{isLoading ? "Loading..." : "Start Interview"}</button>
                         }
                     </div>
                 </div>
